@@ -96,7 +96,7 @@ if( isset($_POST['insertButton']))
             </div>
            
             <button type="submit" name="insertButton" class="btn btn-secondary">Submit</button>
-            <a href="login.html" style="color:#FF0000;">click here to login </a>
+            <a href="login.php" style="color:#FF0000;">click here to login </a>
           </form>
     </div>
 
