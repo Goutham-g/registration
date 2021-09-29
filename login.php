@@ -1,5 +1,5 @@
 <?php
-include("dbconnection.php");
+include("conn.php");
 global $connection;
 if( isset($_POST['insertLogin']))
 {
