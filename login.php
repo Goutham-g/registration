@@ -1,3 +1,34 @@
+<?php
+include("dbconnection.php");
+global $connection;
+if( isset($_POST['insertLogin']))
+{
+$userName = $_POST['userName'];
+$password = $_POST['password'];
+
+$sql = "SELECT * FROM registration WHERE email='$userName' AND password='$password' ";
+
+		$result = mysqli_query($connection, $sql);
+
+		if (mysqli_num_rows($result) == 1) {
+			$row = mysqli_fetch_assoc($result);
+            if ($row['email'] == $userName && $row['password'] === $password) {
+            	$_SESSION['username'] = $row['email'];
+            	$_SESSION['name'] = $row['firstname'];
+            	$_SESSION['id'] = $row['id'];
+            	header("Location: home.php");
+		        exit();
+            }else{
+				header("Location: login.php?error=Incorect User name or password");
+		        exit();
+			}
+		}else{
+			header("Location: login.php?error=Incorect User name or password");
+	        exit();
+		}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,18 +52,18 @@
 
             <div class="mb-3" >
             <label for="user" class="form-label">Username</label>
-            <input type=text class="form-label" id="user" >
+            <input type=text class="form-label" name=userName id="user" >
          </div>
     
 
               
             <div  class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="text"  id="exampleInputPassword1">
+              <input type="text" name="password"  id="exampleInputPassword1">
             </div>
     
            
-            <button type="submit" class="btn btn-secondary">Login</button>
+            <button type="submit" name="insertLogin" class="btn btn-secondary">Login</button>
           </form>
     </div>
 
